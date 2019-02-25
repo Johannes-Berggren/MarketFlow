@@ -1,0 +1,64 @@
+{
+  "name": "marketflow",
+  "version": "0.0.1",
+  "description": "Visualising the current stock market sentiment.",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://johannes-berggren@github.com/Johannes-Berggren/MarketFlow.git"
+  },
+  "keywords": [
+    "Stock",
+    "Market",
+    "Sentiment",
+    "Visualization"
+  ],
+  "author": "Johannes Berggren <johannes@berggren.co> (https://johannesberggren.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Johannes-Berggren/MarketFlow/issues"
+  },
+  "homepage": "https://github.com/Johannes-Berggren/MarketFlow#readme",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "vue": "^2.6.6",
+    "vue2vis": "0.0.16"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

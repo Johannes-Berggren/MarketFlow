@@ -154,9 +154,9 @@
             complete: function (results) {
               results.data = results.data.reverse()
               for (let i = 1; i < results.data.length; i++) {
-                self.chartData.series[5].data.push(parseFloat(results.data[i][1]) * 100)
+                self.chartData.series[5].data.push(parseFloat(results.data[i][1] - results.data[i][3]) * 100 + 50)
                 // self.chartData.series[6].data.push(parseFloat(results.data[i][2]) * 100)
-                self.chartData.series[7].data.push(parseFloat(results.data[i][3]) * 100)
+                // self.chartData.series[7].data.push(parseFloat(results.data[i][5]) * 100)
               }
             }
           })

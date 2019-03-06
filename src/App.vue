@@ -1,22 +1,7 @@
 <template>
   <div class="wrapper">
-    <!--<chartist-->
-    <!--:data="chartData"-->
-    <!--ratio="ct-major-second"-->
-    <!--type="Line"-->
-    <!--:options="{-->
-    <!--showArea: true,-->
-    <!--showLine: false,-->
-    <!--showPoint: false,-->
-    <!--fullWidth: true,-->
-    <!--axisX: {-->
-    <!--showLabel: true,-->
-    <!--showGrid: false-->
-    <!--}-->
-    <!--}">-->
-    <!--</chartist>-->
     <chart class="stock" :constructor-type="'stockChart'" :options="chartData" />
-    <!--<pre>{{ chartData.series }}</pre>-->
+    <a href="https://johannesberggren.com">JohannesBerggren.com</a>
   </div>
 </template>
 
@@ -28,7 +13,6 @@
 
   stockInit(Highcharts)
 
-
   export default {
     components: {
       Chart
@@ -39,19 +23,8 @@
           labels: [],
           series: [
             {
-              name: 'VIX Open',
-              data: [],
-              pointStart: Date.UTC(2005, 1, 3), // FIXME
-              pointInterval: 1000 * 3600 * 33, // FIXME: Doesn't account for weekends
-              tooltip: {
-                valueDecimals: 2
-              }
-            },
-            {
               name: 'VIX High',
               data: [],
-              pointStart: Date.UTC(2005, 1, 3), // FIXME
-              pointInterval: 1000 * 3600 * 33, // FIXME: Doesn't account for weekends
               tooltip: {
                 valueDecimals: 2
               }
@@ -59,17 +32,6 @@
             {
               name: 'VIX Low',
               data: [],
-              pointStart: Date.UTC(2005, 1, 3), // FIXME
-              pointInterval: 1000 * 3600 * 33, // FIXME: Doesn't account for weekends
-              tooltip: {
-                valueDecimals: 2
-              }
-            },
-            {
-              name: 'VIX Close',
-              data: [],
-              pointStart: Date.UTC(2005, 1, 3), // FIXME
-              pointInterval: 1000 * 3600 * 33, // FIXME: Doesn't account for weekends
               tooltip: {
                 valueDecimals: 2
               }
@@ -77,35 +39,13 @@
             {
               name: 'ISM',
               data: [],
-              pointStart: Date.UTC(2005, 1, 1), // FIXME
-              pointInterval: 1000 * 3600 * 24 * 30, // FIXME: Doesn't account for weekends
               tooltip: {
                 valueDecimals: 2
               }
             },
             {
-              name: 'AAII Bullish',
+              name: 'AAII Bulls minus Bears',
               data: [],
-              pointStart: Date.UTC(2005, 1, 6), // FIXME
-              pointInterval: 1000 * 3600 * 24 * 7,
-              tooltip: {
-                valueDecimals: 2
-              }
-            },
-            {
-              name: 'AAII Neutral',
-              data: [],
-              pointStart: Date.UTC(2005, 1, 6), // FIXME
-              pointInterval: 1000 * 3600 * 24 * 7,
-              tooltip: {
-                valueDecimals: 2
-              }
-            },
-            {
-              name: 'AAII Bearish',
-              data: [],
-              pointStart: Date.UTC(2005, 1, 6), // FIXME
-              pointInterval: 1000 * 3600 * 24 * 7,
               tooltip: {
                 valueDecimals: 2
               }
@@ -119,16 +59,22 @@
     mounted () {
       const self = this
 
+      // console.log(Date.UTC(2005, 1, 3))
+
       fetch('./vix-daily_csv.csv')
         .then(response => response.text())
         .then(VIXRawData => {
           Papa.parse(VIXRawData, {
             complete: function (results) {
-              for (let i = 1; i < results.data.length; i++) {
-                // self.chartData.series[0].data.push(parseFloat(results.data[i][1]))
-                self.chartData.series[1].data.push(parseFloat(results.data[i][2]))
-                self.chartData.series[2].data.push(parseFloat(results.data[i][3]))
-                // self.chartData.series[3].data.push(parseFloat(results.data[i][4]))
+              for (let i = 1; i < results.data.length - 1; i++) {
+                self.chartData.series[0].data.push([
+                  new Date(results.data[i][0]).getTime(),
+                  parseFloat(results.data[i][2])
+                ])
+                self.chartData.series[1].data.push([
+                  new Date(results.data[i][0]).getTime(),
+                  parseFloat(results.data[i][3])
+                ])
               }
             }
           })
@@ -140,8 +86,11 @@
           Papa.parse(ISMRawData, {
             complete: function (results) {
               results.data = results.data.reverse()
-              for (let i = 1; i < results.data.length; i++) {
-                self.chartData.series[4].data.push(parseFloat(results.data[i][1]))
+              for (let i = 1; i < results.data.length - 1; i++) {
+                self.chartData.series[2].data.push([
+                  new Date(results.data[i][0]).getTime(),
+                  parseFloat(results.data[i][1])
+                ])
               }
             }
           })
@@ -153,10 +102,11 @@
           Papa.parse(AAIIRawData, {
             complete: function (results) {
               results.data = results.data.reverse()
-              for (let i = 1; i < results.data.length; i++) {
-                self.chartData.series[5].data.push(parseFloat(results.data[i][1] - results.data[i][3]) * 100 + 50)
-                // self.chartData.series[6].data.push(parseFloat(results.data[i][2]) * 100)
-                // self.chartData.series[7].data.push(parseFloat(results.data[i][5]) * 100)
+              for (let i = 1; i < results.data.length - 1; i++) {
+                self.chartData.series[3].data.push([
+                  new Date(results.data[i][0]).getTime(),
+                  parseFloat(results.data[i][1] - results.data[i][3]) * 100 + 50
+                ])
               }
             }
           })
@@ -166,6 +116,11 @@
 </script>
 
 <style scoped>
+  a {
+    float: right;
+    font-size: 12px;
+  }
+
   .stock {
     width: 100%;
     margin: 0 auto

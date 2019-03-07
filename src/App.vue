@@ -1,8 +1,18 @@
 <template>
-  <div class="wrapper">
-    <chart class="stock" :constructor-type="'stockChart'" :options="chartData" />
-    <a href="https://johannesberggren.com">JohannesBerggren.com</a>
-  </div>
+  <el-row>
+    <el-row type="flex" justify="center">
+      <h1>MarketFlow</h1>
+    </el-row>
+    <el-row>
+      <chart class="stock" :constructor-type="'stockChart'" :options="chartData" />
+      <a href="https://johannesberggren.com">JohannesBerggren.com</a>
+    </el-row>
+    <el-row>
+      <h2>ISM - PMI Composite Index</h2>
+      <h2>VIX - CBOE Volatility Index</h2>
+      <h2>AAII - Investor Sentiment Data (Bullish - Bearish + 50)</h2>
+    </el-row>
+  </el-row>
 </template>
 
 <script>
@@ -20,7 +30,10 @@
     data () {
       return {
         chartData: {
-          labels: [],
+          xAxis: {
+            min: new Date().getTime() - (1000 * 3600 * 24 * 365),
+            max: new Date().getTime()
+          },
           series: [
             {
               name: 'VIX High',
@@ -59,9 +72,7 @@
     mounted () {
       const self = this
 
-      // console.log(Date.UTC(2005, 1, 3))
-
-      fetch('./vix-daily_csv.csv')
+      fetch('https://datahub.io/core/finance-vix/r/vix-daily.csv')
         .then(response => response.text())
         .then(VIXRawData => {
           Papa.parse(VIXRawData, {
@@ -80,7 +91,7 @@
           })
         })
 
-      fetch('./ISM-MAN_PMI.csv')
+      fetch('https://www.quandl.com/api/v3/datasets/ISM/MAN_PMI.csv?api_key=-mk6d2xWHxz3vdHg6fQj')
         .then(response => response.text())
         .then(ISMRawData => {
           Papa.parse(ISMRawData, {
@@ -96,7 +107,7 @@
           })
         })
 
-      fetch('./AAII-AAII_SENTIMENT.csv')
+      fetch('https://www.quandl.com/api/v3/datasets/AAII/AAII_SENTIMENT.csv?api_key=-mk6d2xWHxz3vdHg6fQj')
         .then(response => response.text())
         .then(AAIIRawData => {
           Papa.parse(AAIIRawData, {

@@ -1,18 +1,35 @@
 <template>
-  <el-row>
-    <el-row type="flex" justify="center">
-      <h1>MarketFlow</h1>
-    </el-row>
-    <el-row>
+  <el-container>
+    <el-header>
+      <el-row type="flex" justify="center">
+        <h1>MarketFlow</h1>
+      </el-row>
+    </el-header>
+    <el-main>
       <chart class="stock" :constructor-type="'stockChart'" :options="chartData" />
+      <el-row>
+        <h2>ISM - PMI Composite Index</h2>
+        <p>The PMI (R) is a composite index based on the diffusion indexes of five of the indexes with equal weights:
+           New
+           Orders (seasonally adjusted), Production (seasonally adjusted), Employment (seasonally adjusted), Supplier
+           Deliveries (seasonally adjusted), and Inventories.</p>
+        <h2>VIX - CBOE Volatility Index</h2>
+        <p>VIX measures market expectation of near term volatility conveyed by stock index option prices. The original
+           VIX
+           was constructed using the implied volatilities of eight different OEX option series so that, at any given
+           time,
+           it represented the implied volatility of a hypothetical at-the-money OEX option with exactly 30 days to
+           expiration.</p>
+        <h2>AAII - Investor Sentiment Data (Bullish - Bearish + 50)</h2>
+        <p>The AAII Investor Sentiment Survey measures the percentage of individual investors who are bullish, bearish,
+           and neutral on the stock market for the next six months; individuals are polled from the ranks of the AAII
+           membership on a weekly basis. Only one vote per member is accepted in each weekly voting period.</p>
+      </el-row>
+    </el-main>
+    <el-footer>
       <a href="https://johannesberggren.com">JohannesBerggren.com</a>
-    </el-row>
-    <el-row>
-      <h2>ISM - PMI Composite Index</h2>
-      <h2>VIX - CBOE Volatility Index</h2>
-      <h2>AAII - Investor Sentiment Data (Bullish - Bearish + 50)</h2>
-    </el-row>
-  </el-row>
+    </el-footer>
+  </el-container>
 </template>
 
 <script>

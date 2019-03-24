@@ -5,48 +5,78 @@
         <h1>MarketFlow</h1>
       </el-row>
     </el-header>
+
     <el-main>
-      <chart class="stock" v-loading="!(l1 && l2 && l3 && l4)" :constructor-type="'stockChart'" :options="chartData" />
-      <el-row style="text-align: center">
-        <h2 style="color: grey"><i>Is now the time to go all stocks, or all cash?</i></h2>
-      </el-row>
-      <el-row :gutter="40">
-        <el-col :xs="24" :sm="12">
-          <h2><span style="color: #6df06e; font-size: 70px">•</span> ISM - PMI Composite Index</h2>
-          <p>The PMI (R) is a composite index based on the diffusion indexes of five of the indexes with equal weights:
-             New
-             Orders (seasonally adjusted), Production (seasonally adjusted), Employment (seasonally adjusted), Supplier
-             Deliveries (seasonally adjusted), and Inventories.</p>
-          <p class="data-source"><i>Data from Quandl.com</i></p>
+      <el-row :gutter="20" style="display: flex">
+        <el-col :xs="24" :lg="15">
+          <chart class="stock" v-loading="!(l1 && l2 && l3 && l4)" :constructor-type="'stockChart'" :options="chartData" />
+
+          <el-row :gutter="30">
+            <el-col :xs="24" :sm="12">
+              <h2>
+                <span style="color: #6df06e">•</span>
+                ISM - PMI Composite Index
+              </h2>
+              <p>The PMI (R) is a composite index based on the diffusion indexes of five of the indexes with equal weights:
+                 New
+                 Orders (seasonally adjusted), Production (seasonally adjusted), Employment (seasonally adjusted), Supplier
+                 Deliveries (seasonally adjusted), and Inventories.</p>
+              <p class="data-source">
+                <i>Data from Quandl.com</i>
+              </p>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <h2>
+                <span style="color: #3a8ee6">•</span>
+                VIX - CBOE Volatility Index
+              </h2>
+              <p>VIX measures market expectation of near term volatility conveyed by stock index option prices. The original
+                 VIX
+                 was constructed using the implied volatilities of eight different OEX option series so that, at any given
+                 time,
+                 it represented the implied volatility of a hypothetical at-the-money OEX option with exactly 30 days to
+                 expiration.</p>
+              <p class="data-source">
+                <i>Data from Datahub.io</i>
+              </p>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <h2>
+                <span style="color: #ff9f4c">•</span>
+                AAII - Investor Sentiment Data
+              </h2>
+              <p>The AAII Investor Sentiment Survey measures the percentage of individual investors who are bullish,
+                 bearish,
+                 and neutral on the stock market for the next six months; individuals are polled from the ranks of the AAII
+                 membership on a weekly basis. Only one vote per member is accepted in each weekly voting period.</p>
+              <p class="data-source">
+                <i>Data from Quandl.com</i>
+              </p>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <h2>
+                <span style="color: #8082f0">•</span>
+                Eurodollar Futures
+              </h2>
+              <p>Historical Futures Prices: Eurodollar Futures, Continuous Contract #1. Non-adjusted price based on
+                 spot-month
+                 continuous contract calculations. Raw data from CME.</p>
+              <p class="data-source">
+                <i>Data from Quandl.com</i>
+              </p>
+            </el-col>
+          </el-row>
         </el-col>
-        <el-col :xs="24" :sm="12">
-          <h2><span style="color: #3a8ee6; font-size: 70px">•</span> VIX - CBOE Volatility Index</h2>
-          <p>VIX measures market expectation of near term volatility conveyed by stock index option prices. The original
-             VIX
-             was constructed using the implied volatilities of eight different OEX option series so that, at any given
-             time,
-             it represented the implied volatility of a hypothetical at-the-money OEX option with exactly 30 days to
-             expiration.</p>
-          <p class="data-source"><i>Data from Datahub.io</i></p>
-        </el-col>
-        <el-col :xs="24" :sm="12">
-          <h2><span style="color: #ff9f4c; font-size: 70px">•</span> AAII - Investor Sentiment Data</h2>
-          <p>The AAII Investor Sentiment Survey measures the percentage of individual investors who are bullish,
-             bearish,
-             and neutral on the stock market for the next six months; individuals are polled from the ranks of the AAII
-             membership on a weekly basis. Only one vote per member is accepted in each weekly voting period.</p>
-          <p class="data-source"><i>Data from Quandl.com</i></p>
-        </el-col>
-        <el-col :xs="24" :sm="12">
-          <h2><span style="color: #8082f0; font-size: 70px">•</span> Eurodollar Futures</h2>
-          <p>Historical Futures Prices: Eurodollar Futures, Continuous Contract #1. Non-adjusted price based on
-             spot-month
-             continuous contract calculations. Raw data from CME.</p>
-          <p class="data-source"><i>Data from Quandl.com</i></p>
+
+        <el-col :xs="24" :lg="9">
+          <iframe
+                  style="width: 100%; height: 100%; border: none"
+                  src="https://sslecal2.forexprostools.com/?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=15&lang=1%22%20width=%22650%22%20height=%22467%22%20frameborder=%220%22%20allowtransparency=%22true%22%20marginwidth=%220%22%20marginheight=%220%22"></iframe>
         </el-col>
       </el-row>
     </el-main>
-    <el-footer>
+
+    <el-footer style="padding: 30px; margin-top: 40px; background-color: #b8b8b8">
       <a href="https://johannesberggren.com">JohannesBerggren.com</a>
     </el-footer>
   </el-container>
@@ -71,7 +101,7 @@
             height: '50%'
           },
           xAxis: {
-            min: new Date().getTime() - (1000 * 3600 * 24 * 365),
+            min: new Date().getTime() - (1000 * 3600 * 24 * 730),
             max: new Date().getTime()
           },
           series: [
@@ -197,12 +227,12 @@
             complete: function (results) {
               let aaiiMax = parseFloat((results.data[1][5])),
                   aaiiMin = parseFloat((results.data[1][5])),
-                  snpMax = parseFloat((results.data[1][10])),
-                  snpMin = parseFloat((results.data[1][10]))
+                  snpMax  = parseFloat((results.data[1][10])),
+                  snpMin  = parseFloat((results.data[1][10]))
 
               for (let i = 1; i < results.data.length - 1; i++) {
                 let aaiiVal = parseFloat((results.data[i][5])),
-                    snpVal = parseFloat(results.data[i][10])
+                    snpVal  = parseFloat(results.data[i][10])
 
                 if (aaiiVal > aaiiMax) aaiiMax = aaiiVal
                 if (aaiiVal < aaiiMin) aaiiMin = aaiiVal
@@ -266,6 +296,18 @@
     font-size: 60px;
     margin: 0 40px;
     color: grey;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h2 span {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 12px;
   }
 
   a {

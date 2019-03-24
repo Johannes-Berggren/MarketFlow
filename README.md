@@ -1,5 +1,6 @@
 # MarketFlow
 Visualising the current stock market sentiment.
+Live version: [marketflow.johannesberggren.com](https://marketflow.johannesberggren.com)
 
 ## Project setup
 ```

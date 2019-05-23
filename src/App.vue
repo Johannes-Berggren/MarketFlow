@@ -7,10 +7,12 @@
     </el-header>
 
     <el-main>
-      <el-row :gutter="20" style="display: flex">
-        <el-col :xs="24" :lg="15">
-          <chart class="stock" v-loading="!(l1 && l2 && l3 && l4)" :constructor-type="'stockChart'" :options="chartData" />
+      <el-row style="height: 90vh; display: flex">
+        <chart class="stock" v-loading="!(l1 && l2 && l3 && l4)" :constructor-type="'stockChart'" :options="chartData" />
+      </el-row>
 
+      <el-row :gutter="40">
+        <el-col :xs="24" :lg="12">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="12">
               <h2>
@@ -68,7 +70,7 @@
           </el-row>
         </el-col>
 
-        <el-col :xs="24" :lg="9">
+        <el-col :xs="24" :lg="12" style="height: 90vh">
           <iframe
                   style="width: 100%; height: 100%; border: none"
                   src="https://sslecal2.forexprostools.com/?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=15&lang=1%22%20width=%22650%22%20height=%22467%22%20frameborder=%220%22%20allowtransparency=%22true%22%20marginwidth=%220%22%20marginheight=%220%22"></iframe>
@@ -76,7 +78,7 @@
       </el-row>
     </el-main>
 
-    <el-footer style="padding: 30px; margin-top: 40px; background-color: #b8b8b8">
+    <el-footer style="padding: 30px; margin-top: 40px">
       <a href="https://johannesberggren.com">JohannesBerggren.com</a>
     </el-footer>
   </el-container>
@@ -97,9 +99,6 @@
     data () {
       return {
         chartData: {
-          chart: {
-            height: '50%'
-          },
           xAxis: {
             min: new Date().getTime() - (1000 * 3600 * 24 * 730),
             max: new Date().getTime()
